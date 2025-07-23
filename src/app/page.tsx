@@ -123,57 +123,56 @@ export default async function Home() {
       </section>
 
       {/* Blog Section */}
-      <section id="blogs" className="bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-2">
-            Latest <span className="text-green-400">Blogs</span>
-          </h2>
-          <p className="text-gray-400 text-sm sm:text-base">
-            Weekly insights, success stories & helpful tips for lost & found heroes.
-          </p>
-          <div className="w-20 h-1 bg-green-500 mt-4 mx-auto rounded-full" />
-        </div>
+     <section id="blogs" className="bg-black text-white py-20 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-4xl mx-auto text-center mb-12">
+    <h2 className="text-3xl sm:text-4xl font-bold mb-2">
+      Latest <span className="text-green-400">Blogs</span>
+    </h2>
+    <p className="text-gray-400 text-sm sm:text-base">
+      Weekly insights, success stories & helpful tips for lost & found heroes.
+    </p>
+    <div className="w-20 h-1 bg-green-500 mt-4 mx-auto rounded-full" />
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {blogData?.blogPostCollection?.items.map(
-            (blog: {
-              slug: string;
-              blogTitle: string;
-              metaDescription: string;
-              thumbnailImage?: { url: string; title: string };
-              body?: { json: any };
-            }) => (
-              <article
-                key={blog.slug}
-                className="bg-[#111827] border border-[#1f2937] rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-green-400/30 transition-all"
-              >
-                <a href={`/blogs/${blog.slug}`} className="block p-5">
-                  {blog.thumbnailImage?.url && (
-                    <img
-                      src={blog.thumbnailImage.url}
-                      alt={blog.thumbnailImage.title}
-                      className="w-full h-48 object-cover rounded-xl mb-4"
-                      loading="lazy"
-                    />
-                  )}
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">
-                    {blog.blogTitle}
-                  </h3>
-                  <p className="text-gray-400 text-sm sm:text-base line-clamp-3 mb-2">
-                    {blog.metaDescription}
-                  </p>
-                </a>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+    {blogData?.blogPostCollection?.items.map(
+      (blog: {
+        slug: string;
+        blogTitle: string;
+        metaDescription: string;
+        thumbnailImage?: { url: string; title: string };
+      }) => (
+        <article
+          key={blog.slug}
+          className="bg-[#111827] border border-[#1f2937] rounded-2xl overflow-hidden hover:shadow-lg hover:shadow-green-400/30 transition-all flex flex-col"
+        >
+          <a href={`/blogs/${blog.slug}`} className="block p-5">
+            {blog.thumbnailImage?.url && (
+              <img
+                src={blog.thumbnailImage.url}
+                alt={blog.thumbnailImage.title}
+                className="w-full h-48 object-cover rounded-xl mb-4"
+                loading="lazy"
+              />
+            )}
 
-                {blog.body?.json && (
-                  <div className="px-5 pb-4 text-gray-300 text-sm line-clamp-3">
-                    {documentToReactComponents(blog.body.json, richTextOptions)}
-                  </div>
-                )}
-              </article>
-            )
-          )}
-        </div>
-      </section>
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 text-white">
+              {blog.blogTitle}
+            </h3>
+
+            <p className="text-gray-400 text-sm sm:text-base mb-4">
+              {blog.metaDescription}
+            </p>
+
+            <span className="text-green-400 font-medium hover:underline inline-block mt-auto">
+              Read more →
+            </span>
+          </a>
+        </article>
+      )
+    )}
+  </div>
+</section>
 
       <DownloadSection />
     </div>

@@ -37,8 +37,8 @@ const highlights = [
 const CoreHighlights = () => {
   return (
     <section className="relative bg-black py-20 overflow-hidden text-white">
-      {/* Optional Top Curve */}
-      <div className="absolute top-0 left-0 w-full h-24 bg-green-900 rounded-b-full z-0" />
+      {/* ✅ Soft Green Aura Instead of Old Patti */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-16 bg-green-500/10 blur-xl rounded-b-3xl z-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {highlights.map((item, index) => (
@@ -46,17 +46,14 @@ const CoreHighlights = () => {
             key={index}
             className="bg-[#121212] rounded-2xl px-6 py-8 text-center flex flex-col items-center justify-between shadow-lg hover:scale-[1.02] transition-all duration-300"
           >
-            {/* Title */}
             <p className="text-green-400 text-xs font-semibold uppercase tracking-widest mb-3">
               {item.title}
             </p>
 
-            {/* Heading */}
             <h3 className="text-lg sm:text-xl font-bold whitespace-pre-line mb-4 leading-snug">
               {item.heading}
             </h3>
 
-            {/* Conditional Image */}
             {item.image && (
               <Image
                 src={item.image}
@@ -69,7 +66,6 @@ const CoreHighlights = () => {
               />
             )}
 
-            {/* Conditional Rating */}
             {item.rating && (
               <div className="mt-auto text-center">
                 <div className="text-4xl font-bold text-[#b6ffd7]">{item.rating}</div>
@@ -77,7 +73,6 @@ const CoreHighlights = () => {
               </div>
             )}
 
-            {/* Conditional Avatars */}
             {item.avatars && (
               <div className="flex flex-wrap justify-center gap-2 mt-auto">
                 {item.avatars.map((src, i) => (
