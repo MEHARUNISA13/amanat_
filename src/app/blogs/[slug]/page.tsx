@@ -1,9 +1,12 @@
+// app/blog/[slug]/page.tsx
+"use client";
 
 import { gql, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { notFound } from "next/navigation";
 import SecondNavBar from "@/components/SecondNavBar";
+import React from "react";
 
 // Apollo Client setup
 const client = new ApolloClient({
@@ -38,10 +41,10 @@ const GET_BLOG_BY_SLUG = gql`
   }
 `;
 
-// Rich text styling
+// Rich text render options
 const richTextOptions = {
   renderNode: {
-    [INLINES.HYPERLINK]: (node, children) => (
+    [INLINES.HYPERLINK]: (node: any, children: React.ReactNode) => (
       <a
         href={node.data.uri}
         className="text-teal-400 underline hover:text-teal-300"
@@ -51,17 +54,17 @@ const richTextOptions = {
         {children}
       </a>
     ),
-    [BLOCKS.PARAGRAPH]: (node, children) => (
+    [BLOCKS.PARAGRAPH]: (_node: any, children: React.ReactNode) => (
       <p className="text-gray-300 text-base leading-relaxed mb-4">{children}</p>
     ),
-    [BLOCKS.HEADING_2]: (node, children) => (
+    [BLOCKS.HEADING_2]: (_node: any, children: React.ReactNode) => (
       <h2 className="text-lg font-bold text-white mt-6 mb-2">{children}</h2>
     ),
   },
 };
 
 // Page Component
-export default async function BlogDetail({ params }) {
+export default async function BlogDetail({ params }: { params: { slug: string } }) {
   const slug = params.slug;
 
   const { data } = await client.query({
@@ -74,14 +77,11 @@ export default async function BlogDetail({ params }) {
   if (!blog) return notFound();
 
   return (
-    <>
     <div className="bg-black text-white min-h-screen">
       <SecondNavBar />
 
-      {/* Blog Page Content */}
       <div className="bg-black min-h-screen py-20 px-4 flex justify-center items-start">
         <div className="bg-[#0f172a] rounded-2xl shadow-xl border border-teal-900 max-w-2xl w-full p-6 sm:p-10 text-white relative">
-          
           <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-teal-300">
             {blog.blogTitle}
           </h1>
@@ -110,7 +110,6 @@ export default async function BlogDetail({ params }) {
           </div>
         </div>
       </div>
-      </div>
-    </>
+    </div>
   );
 }
