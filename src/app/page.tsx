@@ -109,7 +109,7 @@ export default async function Home() {
               >
                 <h3 className="flex items-start text-base sm:text-lg font-semibold text-green-300 mb-2">
                   <span className="mr-2 text-xl">
-                    {["🛡️", "🔐", "🕵️‍♀️", "❓"][index % 4]}
+                    {["🛡️", "🔐", "👵‍♀️", "❓"][index % 4]}
                   </span>
                   {faq.title}
                 </h3>
