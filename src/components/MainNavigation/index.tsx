@@ -11,6 +11,15 @@ const scrollToSection = (id: string) => {
   }
 };
 
+const navItems = [
+  { id: "features", label: "Features" },
+  { id: "testimonials", label: "Testimonials" },
+  { id: "faq", label: "FAQ" },
+  { id: "blogs", label: "Blogs" },
+  { id: "/qrstickers", label: "QR Stickers", isLink: true }, // ✅ Page redirect
+  { id: "download", label: "Download" },
+];
+
 const MainNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -36,15 +45,25 @@ const MainNavigation = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6 text-white font-semibold text-sm lg:text-base">
-            {["features", "testimonials", "faq", "blogs", "download"].map((id) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className="hover:text-[#A2FACF] transition-colors"
-              >
-                {id.charAt(0).toUpperCase() + id.slice(1)}
-              </button>
-            ))}
+            {navItems.map(({ id, label, isLink }) =>
+              isLink ? (
+                <a
+                  key={id}
+                  href={id}
+                  className="hover:text-[#A2FACF] transition-colors"
+                >
+                  {label}
+                </a>
+              ) : (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className="hover:text-[#A2FACF] transition-colors"
+                >
+                  {label}
+                </button>
+              )
+            )}
           </div>
 
           {/* Desktop CTA */}
@@ -72,15 +91,26 @@ const MainNavigation = () => {
           {/* Mobile Dropdown */}
           {isMenuOpen && (
             <div className="absolute top-full right-0 left-0 mt-2 bg-[#0D1F2D] border-t border-[#1a2a38] text-white flex flex-col items-start gap-4 px-6 py-4 md:hidden z-50 shadow-lg animate-slide-down">
-              {["features", "testimonials", "faq", "blogs", "download"].map((id) => (
-                <button
-                  key={id}
-                  onClick={() => handleScroll(id)}
-                  className="w-full text-left py-1 hover:text-[#A2FACF] transition-colors"
-                >
-                  {id.charAt(0).toUpperCase() + id.slice(1)}
-                </button>
-              ))}
+              {navItems.map(({ id, label, isLink }) =>
+                isLink ? (
+                  <a
+                    key={id}
+                    href={id}
+                    className="w-full text-left py-1 hover:text-[#A2FACF] transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {label}
+                  </a>
+                ) : (
+                  <button
+                    key={id}
+                    onClick={() => handleScroll(id)}
+                    className="w-full text-left py-1 hover:text-[#A2FACF] transition-colors"
+                  >
+                    {label}
+                  </button>
+                )
+              )}
               <button
                 onClick={() => handleScroll("download")}
                 className="w-full mt-2 bg-gradient-to-r from-[#90f7ec] to-[#32ccbc] text-black font-bold rounded-full py-2"

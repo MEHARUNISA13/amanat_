@@ -82,12 +82,14 @@ export default function DownloadSection() {
       <footer className="text-center text-xs mt-12 text-gray-400 pb-12 px-4">
         <p className="mb-2">© 2025 Amanat. All rights reserved.</p>
         <div className="flex flex-wrap justify-center gap-2 text-emerald-300 text-xs sm:text-sm">
-          <a
-            href="mailto:support@amanat.app"
-            className="hover:underline transition"
-          >
-            support@amanat.app
-          </a>
+         <a
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=support@amanat.app"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hover:underline transition"
+>
+  support@amanat.app
+</a>
 
           <span>•</span>
           <a href="/TermsPage" className="hover:underline transition">
